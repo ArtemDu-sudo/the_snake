@@ -41,7 +41,8 @@ clock = pygame.time.Clock()
 
 # Тут опишите все классы игры.
 class GameObject:
-    """Класс, от которого наследуются игровые объекты."""
+    """Класс, от которого наследуются игровые объекты"""
+
     def __init__(self, position=(SCREEN_WIDTH // 2, SCREEN_HEIGHT // 2),
                  body_color=None):
         """Инициализирует позицию и цвет объекта"""
@@ -55,6 +56,7 @@ class GameObject:
 
 class Apple(GameObject):
     """Класс, описывающий яблоко и и как оно работает"""
+
     def __init__(self):
         """Задаёт цвет яблока"""
         super().__init__((320, 240), APPLE_COLOR)
@@ -74,6 +76,7 @@ class Apple(GameObject):
 
 class Snake(GameObject):
     """Класс, описывающий змейку и её поведение"""
+
     def __init__(self):
         """Инициализирует начальное состояние змейки"""
         self.positions = [(320, 240)]
@@ -94,8 +97,11 @@ class Snake(GameObject):
         return self.positions[0]
 
     def move(self):
-        """Обновляет позицию змейки (включает добавление новый головы и
-        удаление хвоста)"""
+        """Обновляет позицию змейки.
+
+        Добавляет новую голову в начало списка и удаляет хвост,
+        если длина змейки не увеличилась
+        """
         head = self.get_head_position()
         new_x = head[0] + self.direction[0] * GRID_SIZE
         new_y = head[1] + self.direction[1] * GRID_SIZE
